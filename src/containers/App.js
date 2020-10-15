@@ -14,10 +14,19 @@ function App(){
         <div className="App">
             <Header />
             <Search />
-            <Categories>
+            <Categories title="Mi lista">
                 <Carousel>
                     <CarouselItem />
                     <CarouselItem />
+                    <CarouselItem />
+                    <CarouselItem />
+                    <CarouselItem />
+                    <CarouselItem />
+                </Carousel>
+            </Categories>
+
+            <Categories title="Lista favoritos">
+                <Carousel>
                     <CarouselItem />
                     <CarouselItem />
                 </Carousel>
