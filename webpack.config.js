@@ -44,6 +44,16 @@ module.exports = {
           'sass-loader',
         ]
       },
+      {
+        /**interceptamos una serie de tipos de archivos */
+        test: /\.jpg|png|gif|woff|eot|ttf|svg|mp4|webm$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            outputPath: 'assets/images',
+          },
+        },
+      },
     ],
   },
   plugins: [
