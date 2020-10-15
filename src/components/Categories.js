@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../assets/styles/components/Categories.scss';
+
 function Categories({ children }){
     return(
         <div className="Categories">
