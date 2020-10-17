@@ -22,7 +22,9 @@ function App(){
            {initialState.mylist.length > 0 &&
                 <Categories title="Mi lista">
                     <Carousel>
-                        <CarouselItem />
+                        {initialState.mylist.map(item => 
+                        <CarouselItem key={item.id} {...item}/>
+                    )}
                     </Carousel>
                 </Categories>
            }
@@ -37,7 +39,9 @@ function App(){
 
             <Categories title="Originales de Platzi Video">
                 <Carousel>
-                    <CarouselItem />
+                   {initialState.originals.map(item =>
+                         <CarouselItem key={item.id} {... item}/>
+                   )}
                 </Carousel>
             </Categories>
             <Footer />
