@@ -7,41 +7,19 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import Footer from '../components/Footer';
 
+import useInitalState from '../hooks/useInitalState';
 import '../assets/styles/App.scss';
 
+const API = 'http://localhost:3000/initalState';
+
 function App(){
-    const [ videos, setVideos ] = React.useState({
-        mylist: [],
-        trends: [],
-        originals: []
-    });
-
-    /**
-     * useEffect nos permite ir a una API obtener datos para luego pasarla a la funcion setVideos para actualizar a la variable videos
-     * useEffect recibe una función anonima
-     * 1. fetch(API) -> recibe una url de nuestra api
-     * 2. Cuando la API responsa la peticion, a la respuesta la convertimos en json para trabjar con ella
-     * 3. La información como resultado de la llamada la pasamos a la función setVideos()
-     *  
-     * useEffect recibe un segundo parametro que me mantiene escuchando alguna propiedad que pueda cambiar y asi volver a ejecutarse
-     * si no le pasamos esta propiedad useEffect creara un loop infinito.
-     * Lo que nosotros queremos es que se llame una primera vez y poder trsnmitir los datos a nuestro estado, para ellos
-     * pasamos el 2do argumento como un arreglo vacio
-     */
-    useEffect(()=>{
-        fetch('http://localhost:3000/initalState')
-            .then(response => response.json())
-            .then(data => setVideos(data));
-    }, []);
-
-    console.info(videos);
-
-    return(
+    const initialState = useInitalState(API);
+    return initialState.length === 0 ? <h1>Loading....</h1> : (
         <div className="App">
             <Header />
             <Search />
            
-           {videos.mylist.length > 0 &&
+           {initialState.mylist.length > 0 &&
                 <Categories title="Mi lista">
                     <Carousel>
                         <CarouselItem />
@@ -51,7 +29,7 @@ function App(){
 
             <Categories title="Tendencias">
                 <Carousel>
-                    {videos.trends.map(item => 
+                    {initialState.trends.map(item => 
                         <CarouselItem key={item.id} {...item}/>
                     )}
                 </Carousel>
