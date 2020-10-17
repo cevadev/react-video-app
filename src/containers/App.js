@@ -10,7 +10,11 @@ import Footer from '../components/Footer';
 import '../assets/styles/App.scss';
 
 function App(){
-    const [ videos, setVideos ] = React.useState([]);
+    const [ videos, setVideos ] = React.useState({
+        mylist: [],
+        trends: [],
+        originals: []
+    });
 
     /**
      * useEffect nos permite ir a una API obtener datos para luego pasarla a la funcion setVideos para actualizar a la variable videos
@@ -37,7 +41,7 @@ function App(){
             <Header />
             <Search />
            
-           {
+           {videos.mylist.length > 0 &&
                 <Categories title="Mi lista">
                     <Carousel>
                         <CarouselItem />
@@ -47,7 +51,9 @@ function App(){
 
             <Categories title="Tendencias">
                 <Carousel>
-                    <CarouselItem />
+                    {videos.trends.map(item => 
+                        <CarouselItem key={item.id} {...item}/>
+                    )}
                 </Carousel>
             </Categories>
 
